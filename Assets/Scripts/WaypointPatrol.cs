@@ -5,13 +5,15 @@ using UnityEngine.AI;
 public class WaypointPatrol : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;
-    public Transform[] waypoints;
+    //public Transform[] waypoints;
     public Transform player;
     public Movement character;
     public int damage = 1;
-    int m_CurrentWaypointIndex;
+    //public Animator anim ;
+    public bool isattacking;
+    //int m_CurrentWaypointIndex;
     /*
-    void Start()
+    void Start()  
     {
         navMeshAgent.SetDestination(waypoints[1].position);
     }
@@ -19,19 +21,22 @@ public class WaypointPatrol : MonoBehaviour
     void Awake()
     {
         player = GameObject.Find("character").transform;
+        isattacking = false; 
+
     }
     void Update()
     {
-        /*
-        if(navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance)
-        {
-            m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
-            //navMeshAgent.SetDestination (waypoints[m_CurrentWaypointIndex].position);
-        }
-        */
+        
+        isattacking = false;
         navMeshAgent.SetDestination (player.position);
-        if (navMeshAgent.remainingDistance<1.5f)
+        if (navMeshAgent.remainingDistance<3.0f){
+
+        
         character.TakeDamage(damage);
+       // isattacking =true;
+
+        }
+        //anim.SetBool("IsAttacking",isattacking);
 
     }
     //navMeshAgent.SetDestination (waypoints[m_CurrentWaypointIndex].position);
